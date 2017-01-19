@@ -3,9 +3,12 @@
 
     <span class="error" *ngIf="error">{{ error }}</span>
 
-  <button (click)="loginFb()" id="fb">Login With Facebook</button><br>
-  <button (click)="loginGoogle()" id="google">Login With Google</button>
-  <button routerLink="/login-email" id="email">Email</button>
+    <button class="ui facebook button" (click)="loginFb()"><i class="facebook icon"></i>Login With Facebook</button>
+    <div class="ui divider"></div>
+    <button class="ui google plus button" (click)="loginGoogle()"><i class="google icon"></i>Login With Google</button>
+    <div class="ui divider"></div>
+    <button routerLink="/login-email" class="ui basic button"> <i class="icon user"></i>Email</button>
+
 
   <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
 </div>

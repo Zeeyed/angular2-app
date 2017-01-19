@@ -10,6 +10,8 @@ import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
 import { AuthService } from './auth.service';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 
 export const firebaseConfig = {
@@ -26,7 +28,9 @@ export const firebaseConfig = {
     LoginComponent,
     EmailComponent,
     SignupComponent,
-    MembersComponent
+    MembersComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,12 @@
 <div class="form-container" id="toolbar">
     <header [@fallIn]="state">
       <button (click)="logout()" class="basic-btn">Logout</button>
+      <div class="header-title">Profile</div>
     </header>
     <div id="page" [@moveInLeft]="state">
       <h2>Hey {{ name.auth.displayName }}!</h2>
 
-      
+      <h3> Your email </h3>
+      <input type="text" name="" value="{{ name.auth.email }}">
     </div>
-
 </div>
