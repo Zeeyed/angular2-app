@@ -1,12 +1,63 @@
+<div class="ui menu">
+  <a class="item">Browse</a>
+  <a class="item">Submit</a>
+  <div class="right menu">
+    <a class="item">Sign Up</a>
+    <a class="item">Help</a>
+  </div>
+</div>
 <div class="form-container" id="toolbar">
-    <header [@fallIn]="state">
+    <!-- <header [@fallIn]="state">
       <button (click)="logout()" class="basic-btn">Logout</button>
       <div class="header-title">Profile</div>
-    </header>
+    </header> -->
     <div id="page" [@moveInLeft]="state">
       <h2>Hey {{ name.auth.displayName }}!</h2>
 
-      <h3> Your email </h3>
-      <input type="text" name="" value="{{ name.auth.email }}">
+      <div *ngIf="appState == 'extend'">
+        <div>
+          <button class="ui button" (click)="changeState('default')">Go back</button>
+        </div>
+
+        <div *ngFor="let business of businesses">
+          <div *ngIf="business.$key == activeKey">
+            <div>
+              <h3>{{ business.company}}</h3>
+              <h3>{{ business.phone}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <table class="ui selectable celled table">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Company</th>
+      <th>Phone</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let business of businesses">
+      <td>{{business.category}}</td>
+      <td>{{business.company}}</td>
+      <td>{{business.phone}}</td>
+      <td>
+        <div class="ui primary button" (click)="changeState('extend', business.$key)">
+          More
+        </div>
+        <div class="ui button">
+          Edit
+        </div>
+        <div class="ui red button">
+          Edit
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
     </div>
 </div>

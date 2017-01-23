@@ -1,0 +1,14 @@
+{
+  "0": {
+    "body": "This is the body",
+    "name": "item one"
+  },
+  "1": {
+    "body": "This is the body",
+    "name": "item two"
+  },
+  "2": {
+    "body": "This is the body",
+    "name": "item three"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "0": {
+    "category": "Retail",
+    "city": "Milwaukee",
+    "company": "JumpXS",
+    "description": "Nulla ut erata maris vulputa",
+    "email": "dfjsllsd@phoca.com",
+    "phone": "1-(525)5214-6542",
+    "state": "Ohio",
+    "street_address": "256 Shre Trerras",
+    "year_in_business": 7,
+    "zip_code": "65472"
+  },
+  "1": {
+    "category": "IT",
+    "city": "Santa Monica",
+    "company": "Lazz",
+    "description": "Nulla ut erata maris vulputa",
+    "email": "lazz@phoca.com",
+    "phone": "1-(525)1252-6449",
+    "state": "San Francisco",
+    "street_address": "21 2nd Street",
+    "year_in_business": 7,
+    "zip_code": "65472"
+  },
+  "2": {
+    "category": "Human Resources",
+    "city": "New York",
+    "company": "JumpXS",
+    "description": "Nulla ut erata maris vulputa",
+    "email": "dfjsllsd@phoca.com",
+    "phone": "1-(525)5214-6542",
+    "state": "NY",
+    "street_address": "256 Shre Trerras",
+    "year_in_business": 7,
+    "zip_code": "10021"
+  }
+}
