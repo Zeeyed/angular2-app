@@ -1,63 +1,221 @@
-<div class="ui menu">
-  <a class="item">Browse</a>
-  <a class="item">Submit</a>
-  <div class="right menu">
-    <a class="item">Sign Up</a>
-    <a class="item">Help</a>
-  </div>
-</div>
-<div class="form-container" id="toolbar">
-    <!-- <header [@fallIn]="state">
-      <button (click)="logout()" class="basic-btn">Logout</button>
-      <div class="header-title">Profile</div>
-    </header> -->
-    <div id="page" [@moveInLeft]="state">
-      <h2>Hey {{ name.auth.displayName }}!</h2>
+<div class="ui main text container">
+      <div class="ui-container" [@moveInLeft]="state">
 
-      <div *ngIf="appState == 'extend'">
-        <div>
-          <button class="ui button" (click)="changeState('default')">Go back</button>
-        </div>
+          <!-- <header [@fallIn]="state">
+            <button (click)="logout()" class="basic-btn">Logout</button>
+            <div class="header-title">Profile</div>
+          </header> -->
+          <div>
+            <h2>Hey {{ name.auth.displayName }}!</h2>
 
-        <div *ngFor="let business of businesses">
-          <div *ngIf="business.$key == activeKey">
-            <div>
-              <h3>{{ business.company}}</h3>
-              <h3>{{ business.phone}}</h3>
+            <div *ngIf="appState == 'default'" class="six wide field">
+              <div>
+                <button type="button" name="button" (click)="changeState('add')">Add business</button>
+              </div>
+              <label>Filter</label>
+              <div class="two fields">
+                <div class="field">
+                  <select (change)="filterCategory(filteredCategory.value)" #filteredCategory class="ui fluid search dropdown" name="card[expire-month]">
+                    <option value="default">Select Category</option>
+                    <option *ngFor="let category of categories" value="{{ category.name }}">
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
+
+<!-- ADD FORM -->
+            <div *ngIf="appState == 'add'">
+
+              <form class="ui form" (submit)="addBusiness(
+              company.value,
+              description.value,
+              category.value,
+              years_in_business.value,
+              street_address.value,
+              city.value,
+              state.value,
+              email.value,
+              zipcode.value,
+              phone.value
+              )">
+                <h3 class="ui dividing header">Add Business</h3>
+                  <label>Category</label>
+                  <div class="field">
+                    <select #category class="ui fluid search dropdown">
+                      <option value="default">Select Category</option>
+                      <option *ngFor="let category of categories" value="{{ category.name }}">
+                        {{ category.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="two fields">
+                    <div class="field">
+                       <label>Company Name</label>
+                      <input #company type="text" name="shipping[first-name]" placeholder="Company Name">
+                    </div>
+                    <div class="field">
+                       <label>Years in Business</label>
+                      <input #years_in_business type="text" name="shipping[last-name]" placeholder="Years in Business">
+                    </div>
+                    <div class="field">
+                       <label>Description</label>
+                      <input #description type="text" name="shipping[last-name]" placeholder="description">
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                       <label>Phone</label>
+                      <input #phone type="text" name="shipping[first-name]" placeholder="Company Name">
+                    </div>
+                    <div class="field">
+                       <label>Email</label>
+                      <input #email type="text" name="shipping[last-name]" placeholder="email">
+                    </div>
+                    <div class="field">
+                       <label>Street Address</label>
+                      <input #street_address type="text" name="shipping[last-name]" placeholder="street">
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                       <label>City</label>
+                      <input #city type="text" name="shipping[first-name]" placeholder="Company Name">
+                    </div>
+                    <div class="field">
+                       <label>State</label>
+                      <input #state type="text" name="shipping[last-name]" placeholder="state">
+                    </div>
+                    <div class="field">
+                       <label>Zipcode</label>
+                      <input #zipcode type="text" name="shipping[last-name]" placeholder="zipcode">
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                      <input type="submit" value="submit">
+                    </div>
+                  </div>
+
+              </form>
+            </div>
+<!-- Edit Form -->
+            <div *ngIf="appState == 'edit'">
+
+              <form class="ui form" (submit)="updateBusiness()">
+                <h3 class="ui dividing header">Edit Business</h3>
+                  <label>Category</label>
+                  <div class="field">
+                    <select [(ngModel)]="activeCategory" name="category" class="ui fluid search dropdown">
+                      <option value="default">Select Category</option>
+                      <option *ngFor="let category of categories" value="{{ category.name }}">
+                        {{ category.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="two fields">
+                    <div class="field">
+                       <label>Company Name</label>
+                      <input type="text" [(ngModel)]="activeCompany" name="company" placeholder="Company Name">
+                    </div>
+                    <div class="field">
+                       <label>Years in Business</label>
+                      <input type="text" [(ngModel)]="activeYearsInBusiness" name="years_in_business" placeholder="Years in Business">
+                    </div>
+                    <div class="field">
+                       <label>Description</label>
+                      <input type="text" [(ngModel)]="activeDescription" name="description" placeholder="description">
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                       <label>Phone</label>
+                      <input type="text" [(ngModel)]="activePhone" name="phone" placeholder="Company phone">
+                    </div>
+                    <div class="field">
+                       <label>Email</label>
+                    </div>
+                    <input type="text" [(ngModel)]="activeEmail" name="email" placeholder="email">
+                    <div class="field">
+                       <label>Street Address</label>
+                      <input type="text" [(ngModel)]="activeStreetAddress" name="street_address" placeholder="street">
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                       <label>City</label>
+                      <input type="text" [(ngModel)]="activeCity" name="city" placeholder="city">
+                    </div>
+                    <div class="field">
+                       <label>State</label>
+                      <input type="text" [(ngModel)]="activeState" name="state" placeholder="state">
+                    </div>
+                    <div class="field">
+                       <label>Zipcode</label>
+                      <input type="text" [(ngModel)]="activeZipcode" name="zipcode" placeholder="zipcode">
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                      <input type="submit" value="submit">
+                    </div>
+                  </div>
+
+              </form>
+            </div>
+            <div *ngIf="appState == 'extend'">
+              <div>
+                <button class="ui button" (click)="changeState('default')">Go back</button>
+              </div>
+
+              <div *ngFor="let business of businesses">
+                <div *ngIf="business.$key == activeKey">
+                  <div>
+                    <h3>{{ business.company}}</h3>
+                    <h3>{{ business.phone}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <table class="ui selectable celled table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Company</th>
+            <th>Phone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let business of businesses">
+            <td>{{business.category}}</td>
+            <td>{{business.company}}</td>
+            <td>{{business.phone}}</td>
+            <td>
+              <div class="ui primary button" (click)="changeState('extend', business.$key)">
+                More
+              </div>
+              <div class="ui button" (click)="showEdit(business)">
+                Edit
+              </div>
+              <div class="ui red button" (click)="deleteBusiness(business.$key)">
+                Delete
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
           </div>
-        </div>
       </div>
 
-
-
-      <table class="ui selectable celled table">
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Company</th>
-      <th>Phone</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let business of businesses">
-      <td>{{business.category}}</td>
-      <td>{{business.company}}</td>
-      <td>{{business.phone}}</td>
-      <td>
-        <div class="ui primary button" (click)="changeState('extend', business.$key)">
-          More
-        </div>
-        <div class="ui button">
-          Edit
-        </div>
-        <div class="ui red button">
-          Edit
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
     </div>
-</div>
